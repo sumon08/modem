@@ -25,7 +25,7 @@ uint8_t rx_buff[1600];
 
 void SendPacket(uint8_t ch, uint8_t *data, uint16_t len)
 {
-    packet_buffer[0] = 0xF9;
+    packet_buffer[0] = 0xF7;
     packet_buffer[1] = ch;
     packet_buffer[2] = len >> 8;
     packet_buffer[3] = len >> 0;
@@ -108,7 +108,7 @@ void MasterRxTask(void *param)
         uint8_t byte;
         if (UsartReceiveByte(mstr_port, &byte) == 1)
         {
-            if (byte == 0xF9 && packet_start == false)
+            if (byte == 0xF7 && packet_start == false)
             {
                 rx_index = 1;
                 packet_start = true;
